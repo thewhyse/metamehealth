@@ -1,0 +1,15 @@
+.wp-block-spacer {
+  &.is-style-spacer-110 {
+    height: var(--spacer-110) !important;
+  }
+
+  &.is-style-spacer-125 {
+    height: var(--spacer-125) !important;
+  }
+}
+
+p + .wp-block-spacer {
+  &.is-style-spacer-110 {
+    height: calc(var(--spacer-110) - 30px) !important;
+  }
+}
