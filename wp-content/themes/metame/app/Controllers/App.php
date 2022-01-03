@@ -8,11 +8,14 @@ class App extends Controller
 {
     // Connect modules
     use Helpers\HelperImages,
-        Helpers\HelperSettings
+        Helpers\HelperSettings,
+        Modules\ModuleBlockContent
     {
         Helpers\HelperImages::traitSetup insteadof Helpers\HelperSettings;
+        Helpers\HelperImages::traitSetup insteadof Modules\ModuleBlockContent;
         Helpers\HelperImages::traitSetup as traitSetupHI;
         Helpers\HelperSettings::traitSetup as traitSetupHS;
+        Modules\ModuleBlockContent::traitSetup as traitSetupBC;
     }
 
     public static function setup()
@@ -20,6 +23,7 @@ class App extends Controller
         // Traits setup
         static::traitSetupHI();
         static::traitSetupHS();
+        static::traitSetupBC();
     }
 
     public function siteName()
@@ -111,7 +115,7 @@ class App extends Controller
         return "<a href='{$link}' class='back-link underlined'><span class='arrow via-border to-left'></span>{$text}</a>";
     }
 
-    public static function dc_pagination( $instance = null )
+    public static function dc_pagination( $instance = null, $category = 0 )
     {
         global $wp_query;
 
@@ -123,16 +127,25 @@ class App extends Controller
         $args = array(
             'show_all'      => false,
             'prev_next'     => true,
-            'prev_text'    => '<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" role="img" alt="Previous page" aria-label="Previous page" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="svg-inline--fa fa-chevron-left fa-w-10 fa-2x"><path fill="currentColor" d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z" class=""></path></svg><span class="meta-nav screen-reader-text">' . __( 'Previous page', 'yourtheme' ) . ' </span>',
-            'next_text'    => '<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" alt="Next page" aria-label="Next page" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="svg-inline--fa fa-chevron-right fa-w-10 fa-2x"><path fill="currentColor" d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z" class=""></path></svg><span class="meta-nav screen-reader-text">' . __( 'Next page', 'yourtheme' ) . ' </span>',
+            'prev_text'    => '<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-double-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-chevron-double-left fa-w-16 fa-2x"><path fill="currentColor" d="M34.5 239L228.9 44.7c9.4-9.4 24.6-9.4 33.9 0l22.7 22.7c9.4 9.4 9.4 24.5 0 33.9L131.5 256l154 154.7c9.3 9.4 9.3 24.5 0 33.9l-22.7 22.7c-9.4 9.4-24.6 9.4-33.9 0L34.5 273c-9.3-9.4-9.3-24.6 0-34zm192 34l194.3 194.3c9.4 9.4 24.6 9.4 33.9 0l22.7-22.7c9.4-9.4 9.4-24.5 0-33.9L323.5 256l154-154.7c9.3-9.4 9.3-24.5 0-33.9l-22.7-22.7c-9.4-9.4-24.6-9.4-33.9 0L226.5 239c-9.3 9.4-9.3 24.6 0 34z" class=""></path></svg><span class="meta-nav screen-reader-text">' . __( 'Previous page', 'yourtheme' ) . ' </span>',
+            'next_text'    => '<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-double-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-chevron-double-right fa-w-16 fa-2x"><path fill="currentColor" d="M477.5 273L283.1 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.7-22.7c-9.4-9.4-9.4-24.5 0-33.9l154-154.7-154-154.7c-9.3-9.4-9.3-24.5 0-33.9l22.7-22.7c9.4-9.4 24.6-9.4 33.9 0L477.5 239c9.3 9.4 9.3 24.6 0 34zm-192-34L91.1 44.7c-9.4-9.4-24.6-9.4-33.9 0L34.5 67.4c-9.4 9.4-9.4 24.5 0 33.9l154 154.7-154 154.7c-9.3 9.4-9.3 24.5 0 33.9l22.7 22.7c9.4 9.4 24.6 9.4 33.9 0L285.5 273c9.3-9.4 9.3-24.6 0-34z" class=""></path></svg><span class="meta-nav screen-reader-text">' . __( 'Next page', 'yourtheme' ) . ' </span>',
             'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'yourtheme' ) . ' </span>',
+//            'after_page_number'  => '<span class="delimiter">|</span>',
             'total'         => $total,
             'mid_size'      => 2,
             'end_size'      => 1,
             'add_args'      => array(),
         );
 
-        if ( $total > 1 ) echo '<nav class="pagination col-auto p-0">';
+        if ( $category ) {
+            if ( is_array( $category ) ) {
+                $category = implode( ',', $category );
+            }
+
+            $args[ 'base' ] = get_category_link($category) . '%_%';
+        }
+
+        if ( $total > 1 ) echo '<nav class="pagination">';
         echo paginate_links( $args );
         if ( $total > 1 ) echo '</nav>';
 

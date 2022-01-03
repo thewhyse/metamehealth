@@ -61,20 +61,40 @@
 
       img {
         width: auto;
-        margin: 0 auto;
+        margin: 0 var(--bs-gutter-x, 0.75rem) 0 auto;
         display: block;
       }
     }
 
-    .wp-block-media-text__content {
-      text-align: center;
+    &.has-media-on-the-right {
+      .wp-block-media-text__media {
+        img {
+          margin: 0 auto 0 var(--bs-gutter-x, 0.75rem);
+        }
+      }
+    }
 
+    .wp-block-media-text__content {
       .has-large-font-size {
         font-size: 75px;
       }
 
       .has-regular-font-size {
         font-size: 21px;
+      }
+    }
+
+    &.is-style-rounded-image:not(.has-media-on-the-right) {
+      display: flex;
+      flex-direction: column;
+
+      .wp-block-media-text__media {
+        order: 2;
+      }
+
+      .wp-block-media-text__content {
+        order: 1;
+        padding-left: calc(var(--container-fluid-margin) + var(--bs-gutter-x, 0.75rem));
       }
     }
   }  

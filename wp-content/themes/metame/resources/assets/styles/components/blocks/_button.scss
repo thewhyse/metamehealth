@@ -11,14 +11,14 @@
     &.has-primary-color.has-secondary-background-color {
       &:hover {
         background: $primary;
-        color: $white;
+        color: $white !important;
       }
     }
 
     &.has-primary-color.has-white-background-color {
       &:hover {
         background: $secondary;
-        color: $white;
+        color: $white !important;
       }
     }
   }
@@ -79,7 +79,7 @@
 
     &.is-style-short {
       a {
-        width: 240px;
+        width: 285px;
       }
     }
 
@@ -92,6 +92,21 @@
     &.is-style-wide {
       a {
         width: 330px;
+      }
+    }
+
+    &.is-style-inactive {
+      a {
+        font-weight: 600;
+      }
+
+      &.has-extra-large-font-size {
+        a {
+          font-size: 28px !important;
+          line-height: 38px;
+          padding: 25px 20px;
+          margin-bottom: 40px;
+        }
       }
     }
   }

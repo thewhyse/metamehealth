@@ -42,14 +42,14 @@ class NewsInsights extends Controller
         }
     }
 
-    public static function posts( int $attorney = null, int $practice = null, $limit = 0,  $filterDisable = false, $withStats = false )
+    public static function posts( $limit = 0, $categoryFilter = 0 )
     {
         global $wp_query;
         $paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
 //        $filter = get_query_var( 'filter' ) ? get_query_var( 'filter' ) : '';
-        $categoryFilter = ! empty( $_GET[ 'category' ] ) && (int) $_GET[ 'category' ] > 0 ? (int) $_GET[ 'category' ] : '';
-        $practiceFilter = ! empty( $_GET[ 'practice' ] ) && (int) $_GET[ 'practice' ] > 0 ? (int) $_GET[ 'practice' ] : '';
-        $attorneyFilter = !empty($_GET['attorney']) && (int) $_GET['attorney'] > 0 ? (int) $_GET['attorney'] : '';
+        if ( ! empty( $_GET[ 'category' ] ) && (int) $_GET[ 'category' ] > 0 ) {
+            $categoryFilter =  (int) $_GET[ 'category' ];
+        }
 
         $limit = $limit != 0 ? $limit : NewsInsights::$postsPerPage;
 
@@ -65,49 +65,13 @@ class NewsInsights extends Controller
             'ignore_sticky_posts'   => true
         );
 
-//        if ( is_singular( Attorney::$postType ) ) {
-//            $attorney = get_the_ID();
-//        } else if ( get_query_var( 'related-attorney' ) ) {
-//            $attorney = NewsInsights::slugToID( get_query_var( 'related-attorney' ) );
-//        }
-
-        if ( $categoryFilter && ! $filterDisable ) {
+        if ( $categoryFilter ) {
             $args[ 'cat' ] = $categoryFilter;
-        }
-
-        if ($attorneyFilter && ! $filterDisable ) {
-            $args[ 'meta_query' ][] = array(
-                'key'       => NewsInsights::$acfRelatedAttorneys,
-                'value'     => (string) $attorneyFilter,
-                'compare'   => 'LIKE'
-            );
-        }
-
-        if ( $attorney ) {
-            $args[ 'meta_query' ][] = array(
-                'key'       => NewsInsights::$acfRelatedAttorneys,
-                'value'     => (string) $attorney,
-                'compare'   => 'LIKE'
-            );
-        }
-
-        if ( $practiceFilter && ! $filterDisable ) {
-            $practice = $practiceFilter;
-        }
-
-        if ( $practice ) {
-            $args[ 'meta_query' ][] = array(
-                'key'       => NewsInsights::$acfRelatedPractices,
-                'value'     => '"' . (int) $practice . '"',
-                'compare'   => 'LIKE'
-            );
         }
 
         if ( ! empty( $args[ 'meta_query' ] ) ) {
             $args[ 'meta_query' ][ 'relation' ] = 'AND';
         }
-
-        //$posts = get_posts( $args );
 
         $postsQuery = new \WP_Query( $args );
         NewsInsights::$instance = $postsQuery;
@@ -116,22 +80,13 @@ class NewsInsights extends Controller
             return static::getFormattedData( $post );
         }, $postsQuery->posts );
 
-        if ( $withStats ) {
-            return array(
-                'news'          => $news,
-                'currentPage'   => $paged,
-                'showedNum'     => ( $paged * static::$postsPerPage - ( $limit - 1 ) ) . "-" . ( ( $paged * $limit ) <= $postsQuery->found_posts ? $paged * $limit : $postsQuery->found_posts ),
-                'totalPosts'    => $postsQuery->found_posts,
-            );
-        }
-
         return $news;
     }
 
     public static function getFormattedData ( $post )
     {
-        $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumb-news-preview' );
-        $imageX2 = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'thumb-news-preview@x2' );
+        $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'medium' );
+        $imageX2 = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'large' );
         $categories = wp_get_post_terms( $post->ID, array( 'category' ));
 
         return [
@@ -218,7 +173,7 @@ class NewsInsights extends Controller
                 'image' => !empty($image) ? reset( $image ) : get_theme_mod( 'placeholder_image' ),
                 'imageX2' => !empty($imageX2) ? reset( $imageX2 ) : get_theme_mod( 'placeholder_image' ),
                 'title' => get_the_title( $post->ID ),
-                'excerpt' => get_the_excerpt( $post->ID ),
+                'excerpt' => str_replace( '...', '', get_the_excerpt( $post->ID ) ),
                 'terms' => ( !empty( $categories ) ) ? $categories[0] : '',
                 'type' => get_post_type( $post->ID ),
                 'url' => get_permalink( $post->ID ),
@@ -233,21 +188,5 @@ class NewsInsights extends Controller
             'title' => $title,
             'news'  => $result,
         );
-    }
-
-    public static function getFiltersByCategories()
-    {
-        $categories = get_categories();
-
-        if ( ! $categories ) {
-            return false;
-        }
-
-        $result = array();
-        foreach ( $categories as $category ) {
-            $result[ $category->term_id ] = $category->name;
-        }
-
-        return $result;
     }
 }

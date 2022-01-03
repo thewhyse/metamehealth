@@ -132,7 +132,7 @@ trait HelperImages
     public static function webpConvert( $file, $destination = '' )
     {
         // TODO: Remove before deploy
-        if ( ! \App\Controllers\App::themeOptions( 'webp' ) || is_admin() ) {
+        if ( is_admin() ) {
             return $file;
         }
 
@@ -253,29 +253,20 @@ trait HelperImages
 
         $postThumb = get_post_thumbnail_id( $postID );
 
-        if ( Attorney::$postType === get_post_type( $postID ) ) {
-            $image      = wp_get_attachment_image_src( $postThumb, 'attorney' );
-            $imageX2    = wp_get_attachment_image_src( $postThumb, 'full' );
+        $image      = wp_get_attachment_image_src( $postThumb, 'thumb-news-preview' );
+        $imageX2    = wp_get_attachment_image_src( $postThumb, 'thumb-news-preview@x2' );
 
-            $defaults = App::themeOptions( 'attorney' );
-        } else {
-            $image      = wp_get_attachment_image_src( $postThumb, 'thumb-news-preview' );
-            $imageX2    = wp_get_attachment_image_src( $postThumb, 'thumb-news-preview@x2' );
+        $isDefaultImage = 'post-featured-image';
 
-            $defaults = App::themeOptions( 'posts' );
+        if ( ! $image ) {
+            return '';
         }
-
-        $isDefaultImage = ( !empty($image) ) ? 'post-featured-image' : 'default-featured-image';
-
-
-        $image      = !empty($image) ? reset( $image ) : $defaults[ 'placeholderImage' ][ 'x1' ];
-        $imageX2    = !empty($imageX2) ? reset( $imageX2 ) : $defaults[ 'placeholderImage' ][ 'x2' ];
 
         $html = '
         <picture class="' . $isDefaultImage . '">
-          <source srcset="' . App::webpConvert( $image ) . ' 1x, ' . App::webpConvert( $imageX2 ) . ' 2x" type="image/webp" aria-label="' . $alt . '">
-          <source srcset="' . $image . ' 1x, ' . $imageX2 . ' 2x" type="image/jpeg" aria-label="' . $alt . '">
-          <img src="' . $image . '" class="' . $class . '" alt="' . $alt . '">
+          <source srcset="' . App::webpConvert( $image[ 0 ] ) . ' 1x, ' . App::webpConvert( $imageX2[ 0 ] ) . ' 2x" type="image/webp" aria-label="' . $alt . '">
+          <source srcset="' . $image[ 0 ] . ' 1x, ' . $imageX2[ 0 ] . ' 2x" type="image/jpeg" aria-label="' . $alt . '">
+          <img src="' . $image[ 0 ] . '" class="' . $class . '" alt="' . $alt . '">
         </picture>
         ';
 

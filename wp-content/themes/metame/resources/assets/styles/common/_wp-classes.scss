@@ -58,11 +58,11 @@
 
 // Colors
 .has-primary-color {
-  color: $primary;
+  color: $primary !important;
 }
 
 .has-secondary-color {
-  color: $secondary;
+  color: $secondary !important;
 }
 
 .has-blue-color {

@@ -19,13 +19,18 @@ $font-adelle: "Adelle", "Courier", serif;
     // margins
     --fw-indents-104: 20px;
     --fw-indents-168: 20px;
-    --bs-gutter-x: 20px;
+    //--bs-gutter-x: 20px;
+    --container-fluid-margin: 0.1px;
   }
 }
 
 @include media-breakpoint-down(lg) {
   :root {
+    --header-height: 100px;
     --spacer-110: 75px;
+    --spacer-125: 75px;
+    --margin-side-125: 75px;
+    --bs-gutter-x: 30px;
   }
 }
 

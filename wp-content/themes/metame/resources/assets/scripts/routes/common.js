@@ -19,27 +19,20 @@ export default {
     // JavaScript to be fired on all pages, after page specific JS is fired
     faqInit();
   
-    // const navLinks = document.querySelectorAll( '.nav-link' );
-    // const menuToggle = document.getElementById( 'navPrimaryMenu' );
-    // const bsCollapse = new Collapse( menuToggle );
-    // navLinks.forEach( ( l ) => {
-    //   l.addEventListener( 'click', () => { bsCollapse.toggle() } )
-    // } );
+    const mobileMenu = document.getElementById( 'navPrimaryMenu' );
+    const eyebrow = document.querySelector( '.eyebrow-section' );
+    const header = document.getElementById( 'site-navbar' );
     
+    window.addEventListener( 'shown.bs.collapse', function() {
+      if ( window.innerWidth < 1200 ) {
+        let topHeight = eyebrow.offsetHeight + header.offsetHeight;
+        mobileMenu.style.height = ( window.innerHeight - topHeight ) + 'px';
+        document.querySelector( 'body' ).classList.add( 'menu-show' );
+      }
+    } );
   
-    // if ( window.innerWidth >= 992 ) {
-    //   const scrollSpy = new ScrollSpy( document.body, {
-    //     target: '#menu-main-menu',
-    //     offset: 200,
-    //   } );
-    //
-    //   //let menuScrollSpy = document.querySelector('[data-bs-spy="scroll"]');
-    //   window.addEventListener( 'activate.bs.scrollspy', function ( e ) {
-    //     console.log( e );
-    //   } )
-    //   document.getElementById( 'menu-main-menu' ).addEventListener( 'activate.bs.scrollspy', function ( e ) {
-    //     console.log( e );
-    //   } )
-    // }
+    window.addEventListener( 'hidden.bs.collapse', function() {
+      document.querySelector( 'body' ).classList.remove( 'menu-show' );
+    } );
   },
 };

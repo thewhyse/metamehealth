@@ -93,7 +93,7 @@ select {
 @include media-breakpoint-down(lg) {
   input[type=text],
   input[type=email],
-  input[type=phone],
+  input[type=tel],
   select,
   textarea {
     margin-bottom: 20px;
@@ -104,4 +104,13 @@ select {
     min-width: 250px;
     font-size: 20px;
    }
+
+  .wpcf7-form {
+    &[data-status=sent],
+    &[data-status=resetting] {
+      .wpcf7-response-output {
+        padding: 20px 0;
+      }
+    }
+  }
 }

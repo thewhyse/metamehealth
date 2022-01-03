@@ -128,5 +128,10 @@
         padding: 0;
       }
     }
+
+    &.rounded-pill {
+      padding: 30px 10px !important;
+      text-align: center;
+    }
   }
 }

@@ -52,13 +52,13 @@ header {
       padding: 0;
 
       .navbar-toggler-icon {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='19.092' height='19.092' viewBox='0 0 19.092 19.092'%3E%3Cg id='Close_Icon' data-name='Close Icon' transform='translate(-351.454 -28.408)'%3E%3Crect id='Rectangle_169' data-name='Rectangle 169' width='24' height='3' transform='translate(353.575 28.408) rotate(45)' fill='%234c4c4c'/%3E%3Crect id='Rectangle_170' data-name='Rectangle 170' width='2' height='3' transform='translate(360 37)' fill='%234c4c4c'/%3E%3Crect id='Rectangle_171' data-name='Rectangle 171' width='24' height='3' transform='translate(351.454 45.379) rotate(-45)' fill='%234c4c4c'/%3E%3C/g%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='19.092' height='19.092' viewBox='0 0 19.092 19.092'%3E%3Cg id='Close_Icon' data-name='Close Icon' transform='translate(-351.454 -28.408)'%3E%3Crect id='Rectangle_169' data-name='Rectangle 169' width='24' height='3' transform='translate(353.575 28.408) rotate(45)' fill='%23f79144'/%3E%3Crect id='Rectangle_170' data-name='Rectangle 170' width='2' height='3' transform='translate(360 37)' fill='%23f79144'/%3E%3Crect id='Rectangle_171' data-name='Rectangle 171' width='24' height='3' transform='translate(351.454 45.379) rotate(-45)' fill='%23f79144'/%3E%3C/g%3E%3C/svg%3E");
         background-size: 24px;
       }
 
       &[aria-expanded="false"] {
         .navbar-toggler-icon {
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='21' viewBox='0 0 24 21'%3E%3Cg id='Menu_Icon' data-name='Menu Icon' transform='translate(-349 -28)'%3E%3Crect id='Rectangle_169' data-name='Rectangle 169' width='24' height='3' transform='translate(349 28)' fill='%234c4c4c'/%3E%3Crect id='Rectangle_170' data-name='Rectangle 170' width='24' height='3' transform='translate(349 37)' fill='%234c4c4c'/%3E%3Crect id='Rectangle_171' data-name='Rectangle 171' width='24' height='3' transform='translate(349 46)' fill='%234c4c4c'/%3E%3C/g%3E%3C/svg%3E");
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='21' viewBox='0 0 24 21'%3E%3Cg id='Menu_Icon' data-name='Menu Icon' transform='translate(-349 -28)'%3E%3Crect id='Rectangle_169' data-name='Rectangle 169' width='24' height='3' transform='translate(349 28)' fill='%23f79144'/%3E%3Crect id='Rectangle_170' data-name='Rectangle 170' width='24' height='3' transform='translate(349 37)' fill='%23f79144'/%3E%3Crect id='Rectangle_171' data-name='Rectangle 171' width='24' height='3' transform='translate(349 46)' fill='%23f79144'/%3E%3C/g%3E%3C/svg%3E");
         }
       }
     }
@@ -128,7 +128,7 @@ header {
   }
 }
 
-@include media-breakpoint-down(lg) {
+@include media-breakpoint-down(xl) {
   .fixed-top-custom {
     position: fixed;
     top: 0;
@@ -137,11 +137,23 @@ header {
     z-index: 1030;
   }
 
+  .eyebrow-section {
+    .wp-block-cover {
+      padding: 17px 0;
+    }
+
+    p {
+      font-size: 16px;
+    }
+  }
+
   header .navbar {
+    padding: 0 30px;
+
     .brand {
       img,
       svg {
-        height: 49px;
+        height: 25px;
       }
     }
     .nav-primary {
@@ -160,54 +172,82 @@ header {
         right: 0;
         top: 0;
         height: auto;
-        background: $primary;
-        padding: 30px 50px;
+        background: url(../images/mobile-menu-bg.jpg) center no-repeat;
+        background-size: cover;
+        padding: 40px 30px;
 
         ul {
           width: 100%;
-
-          &::after {
-            display: none;
-          }
+          flex-direction: column;
 
           li {
             margin: 0 0 20px 0;
 
+            &:last-child {
+              margin-bottom: 0;
+            }
+
             a {
-              font-weight: 400;
-              font-size: 24px;
+              font-weight: 500;
+              font-size: 30px;
               justify-content: flex-start;
               padding: 0;
               border-radius: 0;
               line-height: 28px;
-
-              &::after {
-                display: none;
-              }
+              color: $primary;
 
               &:hover,
-              &.active {
-                color: $primary;
-                background: $secondary;
-                text-transform: uppercase;
+              &.active,
+              &.current-menu-item {
+                color: $black;
               }
             }
           }
         }
       }
 
-      .menu-footer-menu-container {
-        margin: 27px 50px;
+      .footer-menu-mobile {
+        padding: 0 30px;
+        font-size: 22px;
 
-        ul {
-          padding: 0;
+        .wpcf7-form {
+          h5 {
+            font-size: 22px;
+            font-weight: 500;
+            color: $primary;
+          }
+
+          input[type=text],
+          input[type=email],
+          input[type=phone] {
+            border-radius: 10px;
+            border: 1px solid #3d3d3d;
+            font-size: 18px;
+            line-height: 18px;
+            padding: 13px 20px;
+            margin-bottom: 20px;
+          }
+
+          input[type=submit] {
+            padding: 5px;
+          }
+        }
+
+        ul.menu {
+          display: flex;
           list-style: none;
+          padding: 0;
 
           li {
+            margin-right: 15px;
+
             a {
-              color: $primary;
-              font-size: 18px;
-              line-height: 28px;
+              color: #54534a;
+              font-size: 20px;
+
+              &:hover {
+                color: $secondary;
+              }
             }
           }
         }
@@ -269,5 +309,15 @@ header {
 
   .position-left-mobile img {
     object-position: left!important;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  header .navbar .nav-primary .footer-menu-mobile ul.menu {
+    justify-content: space-between;
+
+    li {
+      margin: 0;
+    }
   }
 }

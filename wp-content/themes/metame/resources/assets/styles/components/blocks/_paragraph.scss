@@ -27,3 +27,13 @@ p {
     line-height: 1.6;
   }
 }
+
+@include media-breakpoint-down(lg) {
+  p.has-extra-large-font-size {
+    line-height: 75px;
+  }
+
+  p.has-small-font-size {
+    font-size: 14px;
+  }
+}

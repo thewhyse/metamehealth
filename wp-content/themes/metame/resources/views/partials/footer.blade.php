@@ -16,7 +16,7 @@
               {!! wp_nav_menu( [ 'theme_location' => 'footer_navigation', 'menu_class' => 'nav-footer' ] ) !!}
             @endif
           </div>
-          <div class="copyright col-12 col-lg-6 align-self-end">
+          <div class="copyright col-12 col-lg-6 align-self-center align-self-lg-end">
             {!! App::siteFooterCopyright() !!}
           </div>
         </div>
