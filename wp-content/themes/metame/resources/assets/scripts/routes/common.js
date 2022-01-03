@@ -34,5 +34,24 @@ export default {
     window.addEventListener( 'hidden.bs.collapse', function() {
       document.querySelector( 'body' ).classList.remove( 'menu-show' );
     } );
+    
+    const readmore = document.querySelectorAll( '.readmore-hidden' );
+    if ( readmore.length ) {
+      readmore.forEach( ( item ) => {
+        let readMoreBut = document.createElement( 'span' );
+        readMoreBut.innerHTML = "Read more";
+        readMoreBut.classList.add( 'readmore-but' );
+        item.appendChild( readMoreBut );
+        item.querySelector( '.readmore-but' ).addEventListener( 'click', function ( but ) {
+          if ( item.classList.contains( 'opened' ) ) {
+            item.classList.remove( 'opened' );
+            but.target.innerHTML = "Read more";
+          } else {
+            item.classList.add( 'opened' );
+            but.target.innerHTML = "Read less";
+          }
+        } )
+      } )
+    }
   },
 };

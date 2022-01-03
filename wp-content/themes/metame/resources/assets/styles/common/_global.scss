@@ -105,6 +105,12 @@ a,
   }
 }
 
+.readmore-hidden {
+  .readmore-but {
+    display: none;
+  }
+}
+
 @include media-breakpoint-down(lg) {
   html,
   body {
@@ -170,6 +176,31 @@ a,
   p {
     a {
       white-space: nowrap;
+    }
+  }
+
+  .readmore-hidden {
+    height: 100px;
+    overflow: hidden;
+
+    .readmore-but {
+      display: block;
+      color: $primary;
+      position: absolute;
+      bottom: 0px;
+      background: #fff;
+      width: 100%;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &.opened {
+      height: auto;
+      overflow: hidden;
+      padding-bottom: 32px;
     }
   }
 }
