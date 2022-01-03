@@ -1,6 +1,6 @@
 <article @php post_class('pt-5') @endphp>
   <header>
-    <h1 class="entry-title h2 mb-0">{!! get_the_title() !!}</h1>
+    <h1 class="entry-title has-primary-color h2 mb-0">{!! get_the_title() !!}</h1>
     @include('partials/entry-meta')
   </header>
   <div class="entry-content">

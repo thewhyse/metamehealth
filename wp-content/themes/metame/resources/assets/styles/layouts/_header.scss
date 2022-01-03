@@ -128,6 +128,19 @@ header {
   }
 }
 
+@include media-breakpoint-down(xxxl) {
+  header .navbar .nav-primary .menu-main-menu-container ul li a {
+    padding: 0.5rem 0.5rem;
+  }
+}
+
+@include media-breakpoint-down(xxl) {
+  header .navbar .nav-primary .menu-main-menu-container ul li a {
+    font-size: 23px;
+    padding: 0.5rem 0.3rem;
+  }
+}
+
 @include media-breakpoint-down(xl) {
   .fixed-top-custom {
     position: fixed;

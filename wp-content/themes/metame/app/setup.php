@@ -40,17 +40,14 @@ add_action( 'wp_head', function () {
  * Inject critical assets in head as early as possible
  */
 add_action('wp_head', function (): void {
+    global $post;
+    $post_slug = $post->post_name;
+
     $critical_CSS = false;
     if (is_front_page()) {
         $critical_CSS = 'front-page.css';
-    } elseif ( is_page_template('views/template-attorney-archive.blade.php') ) {
-        $critical_CSS = 'template-attorney.css';
-    } elseif ( is_page_template('views/template-practices-archive.blade.php') ) {
-        $critical_CSS = 'template-practices.css';
-    } elseif ( is_page_template('views/template-news-insights.blade.php') ) {
-        $critical_CSS = 'template-news.css';
-    } elseif ( is_page_template('views/template-default-with-header.blade.php') ) {
-        $critical_CSS = 'template-page-with-header.css';
+    } elseif ( is_category() ) {
+        $critical_CSS = 'category.css';
     } elseif ( is_singular( NewsInsights::$postType ) ) {
         $critical_CSS = 'single-news.css';
     } elseif ( is_search() ) {
@@ -58,13 +55,22 @@ add_action('wp_head', function (): void {
     } elseif ( is_404() ) {
         $critical_CSS = 'not-found.css';
     } elseif ( is_page() ) {
-        $critical_CSS = 'template-page-default.css';
+        $critical_CSS = 'page.css';
+    }
+
+    if ( $post_slug ) {
+        $asset_path_slug = '/dist/styles/criticals/' . $post_slug . '.css';
+
+        if ( file_exists( get_theme_file_path() . $asset_path_slug ) ) {
+            $critical_CSS = $post_slug . '.css';
+        }
     }
 
     if ( $critical_CSS ) {
         $asset_path = '/dist/styles/criticals/' . $critical_CSS;
 
         if ( file_exists( get_theme_file_path() . $asset_path ) ) {
+            echo "<!-- Critical CSS {$critical_CSS} -->";
             echo '<style id="critical-css">' . file_get_contents( get_theme_file_path() . $asset_path ) . '</style>';
         } else {
             echo "<!-- No Critical CSS -->";
@@ -376,9 +382,9 @@ add_action( 'acf/input/admin_footer', function () {
  */
 add_action( 'pre_get_posts', function ( $q )
 {
-    if(    !is_admin()
+    if( !is_admin()
         && $q->is_main_query()
-        && is_search()
+        && ( is_category() || is_search() )
     ) {
         $q->set( 'posts_per_page', 1 );
     }
