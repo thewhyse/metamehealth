@@ -143,9 +143,18 @@ add_filter( 'upload_mimes', function ( $mimes ) {
 /**
  * Excerpt length
  */
+remove_filter( 'get_the_excerpt', 'wp_trim_excerpt' );
 add_filter( 'get_the_excerpt', function( $excerpt, $post ) {
     $characters = 150; // character limit
-    $excerpt = htmlspecialchars_decode( trim( strip_tags( $excerpt, '<sup><sub>' ) ) );
+    $raw_excerpt = $excerpt;
+    if ( '' == $excerpt ) {
+        $excerpt = $post->post_content;
+        $excerpt = strip_shortcodes( $excerpt );
+        $excerpt = apply_filters( 'the_content', $excerpt );
+        $excerpt = str_replace( ']]>', ']]&gt;', $excerpt );
+        $excerpt = strip_tags( $excerpt, '<b><i><sup><sub><strong>' );
+    }
+    $excerpt = htmlspecialchars_decode( trim( strip_tags( $excerpt, '<sup>' ) ) );
     if ( strlen( $excerpt ) > $characters ) {
         $lastSpacer = strpos( $excerpt, ' ', $characters );
         if ( $lastSpacer !== false ) {
