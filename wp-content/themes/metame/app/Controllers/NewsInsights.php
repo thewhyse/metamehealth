@@ -42,10 +42,13 @@ class NewsInsights extends Controller
         }
     }
 
-    public static function posts( $limit = 0, $categoryFilter = 0 )
+    public static function posts( $limit = 0, $categoryFilter = 0, $paged = 0 )
     {
         global $wp_query;
-        $paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+        if ( ! $paged ) {
+            $paged = get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1;
+        }
+
 //        $filter = get_query_var( 'filter' ) ? get_query_var( 'filter' ) : '';
         if ( ! empty( $_GET[ 'category' ] ) && (int) $_GET[ 'category' ] > 0 ) {
             $categoryFilter =  (int) $_GET[ 'category' ];
