@@ -74,7 +74,8 @@
       font-weight: 500;
       width: 450px;
       max-width: 80%;
-      line-height: 1.08;
+      font-size: 20px;
+      line-height: 28px;
     }
 
     &.wide {
@@ -126,6 +127,7 @@
     &.is-style-icon-with-text {
       figcaption {
         font-size: 20px;
+        line-height: 26px;
       }
     }
   }
