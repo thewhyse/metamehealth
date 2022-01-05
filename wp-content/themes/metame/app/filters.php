@@ -145,7 +145,7 @@ add_filter( 'upload_mimes', function ( $mimes ) {
  */
 add_filter( 'get_the_excerpt', function( $excerpt, $post ) {
     $characters = 150; // character limit
-    $excerpt = htmlspecialchars_decode( trim( strip_tags( $excerpt, 'sup,sub' ) ) );
+    $excerpt = htmlspecialchars_decode( trim( strip_tags( $excerpt, '<sup><sub>' ) ) );
     if ( strlen( $excerpt ) > $characters ) {
         $lastSpacer = strpos( $excerpt, ' ', $characters );
         if ( $lastSpacer !== false ) {
