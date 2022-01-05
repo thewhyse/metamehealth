@@ -30,13 +30,14 @@ p {
 
 @include media-breakpoint-down(xxl) {
   p.has-extra-large-font-size {
-    line-height: 65px;
+    font-size: 65px;
   }
 }
 
 @include media-breakpoint-down(lg) {
   p.has-extra-large-font-size {
     line-height: 75px;
+    font-size: 75px;
   }
 
   p.has-small-font-size {
