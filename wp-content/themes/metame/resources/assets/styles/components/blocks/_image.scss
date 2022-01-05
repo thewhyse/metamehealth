@@ -121,6 +121,16 @@
   }
 }
 
+@include media-breakpoint-down(xxl) {
+  .wp-block-image {
+    &.is-style-icon-with-text {
+      figcaption {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
 @include media-breakpoint-down(lg) {
   .wp-block-image {
     &.is-style-rounded {
