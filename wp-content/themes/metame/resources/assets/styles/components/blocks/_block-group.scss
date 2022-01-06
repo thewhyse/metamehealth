@@ -74,6 +74,8 @@
 
       h2 {
         margin-bottom: 10px;
+        font-size: 40px !important;
+        line-height: 48px;
       }
 
       p:last-child {
@@ -132,6 +134,13 @@
     &.rounded-pill {
       padding: 30px 10px !important;
       text-align: center;
+
+      .wp-block-group__inner-container {
+        h2 {
+          font-size: 28px !important;
+          line-height: 38px;
+        }
+      }
     }
   }
 }

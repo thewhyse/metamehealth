@@ -88,6 +88,14 @@ select {
       padding: 100px 0;
     }
   }
+
+  &[data-status=invalid] {
+    .wpcf7-response-output {
+      font-weight: 600;
+      text-align: center;
+      margin: 0 0 50px;
+    }
+  }
 }
 
 .page-footer {
