@@ -130,6 +130,12 @@
         line-height: 26px;
       }
     }
+
+    &.is-style-right-bottom-shift {
+      img {
+        margin: 100px 0 -200px 0;
+      }
+    }
   }
 }
 
@@ -154,7 +160,7 @@
       }
 
       img {
-        margin: 0 0 -160px 0;
+        margin: 20px 0 -160px 0;
       }
     }
 
