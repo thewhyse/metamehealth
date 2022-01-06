@@ -122,18 +122,22 @@
   }
 }
 
+@include media-breakpoint-down(xxxl) {
+  .wp-block-image {
+    &.is-style-right-bottom-shift {
+      img {
+        margin: 100px 0 -200px 0;
+      }
+    }
+  }
+}
+
 @include media-breakpoint-down(xxl) {
   .wp-block-image {
     &.is-style-icon-with-text {
       figcaption {
         font-size: 20px;
         line-height: 26px;
-      }
-    }
-
-    &.is-style-right-bottom-shift {
-      img {
-        margin: 100px 0 -200px 0;
       }
     }
   }
