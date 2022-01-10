@@ -4,12 +4,23 @@
       .post-item {
         margin-bottom: 1rem;
 
+        .post-title {
+          a {
+            font-weight: 500;
+            color: $primary;
+          }
+        }
+
         .post-date {
-          font-weight: 500;
+          font-weight: 400;
           line-height: 36px;
-          color: $primary;
+          color: $black;
           text-transform: uppercase;
         }
+        //
+        //.post-desc {
+        //
+        //}
 
         .read-more-link {
           color: $primary;

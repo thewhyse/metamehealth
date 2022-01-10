@@ -29,6 +29,14 @@ select {
   border: none;
   background-color: $white;
   box-shadow: 0 10px 48px rgba(0, 0, 0, 0.06);
+
+  &:focus-visible {
+    outline: -webkit-focus-ring-color solid 3px;
+  }
+
+  &.wpcf7-not-valid {
+    outline: red solid 3px;
+  }
 }
 
 input[type=submit] {
