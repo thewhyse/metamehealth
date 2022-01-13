@@ -11,6 +11,8 @@
           NO RESULTS FOUND
       </h2>
       <div>The page you requested could not be found. <br />Try refining your search, or use the navigation above to locate content.</div>
-    @endif
+      <div>&nbsp;</div>
+      
+      @endif
   @endif
 @endsection
