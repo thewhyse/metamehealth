@@ -118,6 +118,10 @@ footer {
       }
     }
   }
+
+  #mmh-office-address span {
+    font-size: 0.8rem;
+  }
 }
 
 @include media-breakpoint-down(xl) {
