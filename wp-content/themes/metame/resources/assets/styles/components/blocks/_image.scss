@@ -208,3 +208,13 @@
     }
   }
 }
+
+@media (min-width: 500px) and (max-width: 767px) {
+  .wp-block-image {
+    &.top-shift {
+      figure {
+        margin: -3.5em 0 0 0.6rem;
+      }
+    }
+  }
+}
