@@ -26,5 +26,6 @@
 @media (min-width: 600px) and (max-width: 781px) {
   .wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column:not(:only-child) {
     flex-basis: 100%!important;
+    margin-left: 0;
   }
 }
