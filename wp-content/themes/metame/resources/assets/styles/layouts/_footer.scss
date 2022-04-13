@@ -124,6 +124,12 @@ footer {
   }
 }
 
+@include media-breakpoint-between(xl, xxl) {
+  footer {
+    background-position: 130% 50%;
+  }
+}
+
 @include media-breakpoint-down(xl) {
   footer {
     background: #f3f5f7;
