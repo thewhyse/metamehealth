@@ -124,6 +124,12 @@ footer {
   }
 }
 
+@media (min-width: 1400px) and (max-width: 1585px) {
+  footer {
+    background-position: 120% 50%;
+  }
+}
+
 @include media-breakpoint-between(xl, xxl) {
   footer {
     background-position: 130% 50%;
