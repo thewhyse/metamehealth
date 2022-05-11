@@ -9,7 +9,7 @@
     ]
   },
   "publicPath": "/wp-content/themes/metame",
-  "devUrl": "http://metame.local",
+  "devUrl": "https://www.metamehealth.com",
   "proxyUrl": "http://localhost:3000",
   "cacheBusting": "[name]_[hash:8]",
   "criticals": [
@@ -40,10 +40,6 @@
     {
       "key": "about-us",
       "src": "/about-us/"
-    },
-    {
-      "key": "join-our-team",
-      "src": "/join-our-team/"
     },
     {
       "key": "contact-us",
