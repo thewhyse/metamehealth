@@ -1,5 +1,5 @@
 footer {
-  background: url(../images/footer-bg.png) #f3f5f7 110% 50% no-repeat;
+  background: url(../images/footer-bg.png) #f3f5f7 110% 0 no-repeat;
   /*background-size: auto 100%;*/
   background-size: 33% 80%;
   padding: 85px 0 25px;
@@ -127,13 +127,15 @@ footer {
 
 @media (min-width: 1400px) and (max-width: 1585px) {
   footer {
-    background-position: 120% 50%;
+    /*background-position: 120% 50%;*/
+    background-position: 120% 0;
   }
 }
 
 @include media-breakpoint-between(xl, xxl) {
   footer {
-    background-position: 130% 50%;
+    /*background-position: 130% 50%;*/
+    background-position: 130% 0;
   }
 }
 
