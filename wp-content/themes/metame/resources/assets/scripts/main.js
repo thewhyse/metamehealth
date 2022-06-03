@@ -23,3 +23,8 @@ const routes = new Router({
 
 // Load Events
 jQuery(document).ready(() => routes.loadEvents());
+
+/*Open terms and policy footer links in different tab*/
+$('#menu-copyright-links-1 a').each(function() {
+  $(this).attr('target', '_blank');
+});
