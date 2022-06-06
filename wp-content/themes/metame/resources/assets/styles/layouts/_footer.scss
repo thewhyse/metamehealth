@@ -27,6 +27,31 @@ footer {
     }
   }
 
+  .menu-footer-menu-container {
+    ul.menu {
+      padding: 0;
+      column-count: 2;
+
+      li {
+        padding: 0;
+        list-style: none;
+        margin-bottom: 15px;
+
+        a {
+          color: $black;
+          font-weight: 400;
+          text-transform: uppercase;
+
+          &:hover {
+            color: $primary;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+
+
   .cf7-footer-form {
     h5 {
       color: $primary;
