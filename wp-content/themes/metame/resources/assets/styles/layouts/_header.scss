@@ -30,6 +30,17 @@ a.skip-main:active {
 .eyebrow-section {
   p {
     margin-bottom: 0;
+
+    #eyebrow-top {
+      a {
+        color: #285873!important;
+        text-decoration: none;
+        font-size: 0.9rem;
+        &:hover {
+          color: #333 !important;
+        }
+      }
+    }
   }
 }
 
