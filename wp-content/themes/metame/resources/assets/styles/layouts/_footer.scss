@@ -147,6 +147,40 @@ footer {
   #mmh-office-address span {
     font-size: 0.8rem;
   }
+
+  #footer-bottom-row {
+
+    .footer-bottom-left-side,
+    .footer-bottom-right-side {
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .footer-bottom-left-side {
+      .soc-icon {
+        margin: 0;
+        width: 71px;
+        height: 71px;
+      }
+      .soc-icon:first-child {
+        margin: 0 20px 0 0;
+      }
+
+    }
+
+    .footer-bottom-left-side {
+      .footer-social-icon {
+        width: 54px;
+        height: 44px;
+      }
+      .footer-social-icon:first-child {
+        margin: 0 20px 0 0;
+      }
+    }
+
+  }
+
+
 }
 
 @media (min-width: 1400px) and (max-width: 1585px) {
