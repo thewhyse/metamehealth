@@ -179,40 +179,17 @@ footer {
 
 }
 
-@include media-breakpoint-between(md, sm) {
+@include media-breakpoint-down(sm) {
   footer {
     #footer-bottom-row {
-      display: flex;
-      justify-content: space-between;
-
-      .footer-bottom-left-side,
       .footer-bottom-right-side {
         width: 48%;
       }
-
-      /*
-      .footer-bottom-left-side {
-        .soc-icon {
-        }
-        .soc-icon:first-child {
-
-        }
-
-      }
-
-      .footer-bottom-right-side {
-        .footer-social-icon {
-        }
-        .footer-social-icon:first-child {
-
-        }
-      }
-      */
-
     }
   }
 
 }
+
 
 @media (min-width: 1400px) and (max-width: 1585px) {
   footer {
