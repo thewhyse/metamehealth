@@ -186,6 +186,7 @@ footer {
       .footer-bottom-left-side,
       .footer-bottom-right-side {
         width: 48%;
+        flex-basis: inherit !important;
       }
     }
   }
