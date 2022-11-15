@@ -182,6 +182,8 @@ footer {
 @include media-breakpoint-down(sm) {
   footer {
     #footer-bottom-row {
+      display: flex;
+      .footer-bottom-left-side,
       .footer-bottom-right-side {
         width: 48%;
       }
