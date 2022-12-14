@@ -19,7 +19,11 @@ function bodhi_svgs_upload_mimes( $mimes = array() ) {
 	$allowed_roles_array = array();
 	$is_role_allowed = array();
 	
-	$allowed_roles_array = $bodhi_svgs_options['restrict'];
+	if( !isset($bodhi_svgs_options['restrict']) ) {
+	    return $mimes;
+	}
+	
+	$allowed_roles_array = (array) $bodhi_svgs_options['restrict'];
 	
 	$user = wp_get_current_user();
  
